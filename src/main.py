@@ -1,11 +1,17 @@
 from fastapi import FastAPI
-from blog.routers import get_router, post_router
+
+from src.database.db_config import engine
+from src.user import models, user_router
+from src.blog import blog_router
 
 
 app = FastAPI()
 
-app.include_router(get_router.router)
-app.include_router(post_router.router)
+app.include_router(blog_router.router)
+app.include_router(user_router.router)
+
+
+models.Base.metadata.create_all(engine)
 
 
 @app.get("/")

@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=pgUser
+      - POSTGRES_PASSWORD=pgPassword
+      - POSTGRES_DB=nudges
+    container_name: wave-postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  adminer:
+    container_name: wave-adminer
+    restart: always
+    image: adminer
+    ports:
+      - 8080:8080
+
+
+volumes:
+  postgres_data:
