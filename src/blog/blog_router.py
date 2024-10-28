@@ -1,5 +1,4 @@
 from fastapi import APIRouter, status, Query, Body
-
 from typing import Optional, List
 from enum import Enum
 
@@ -15,7 +14,9 @@ class BlogType(str, Enum):
     howto = "howto"
 
 
-###     get     ###
+# ===================================================================
+# get
+# ===================================================================
 @router.get(
     "/all",
     summary="Retrieve all blogs",
@@ -46,7 +47,9 @@ def get_comment(
     }
 
 
-###     post     ###
+# ===================================================================
+# post
+# ===================================================================
 @router.post("/new/{blog_id}")
 def create_blog(blog: BlogModel, blog_id: int, version: int = 1):
     return {"blog_id": blog_id, "data": blog, "version": version}
