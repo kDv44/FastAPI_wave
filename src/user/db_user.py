@@ -21,12 +21,12 @@ def db_get_all_users(db: Session):
     return db.query(DbUser).all()
 
 
-def db_get_user(id: int, db: Session):
-    return db.query(DbUser).filter(DbUser.id == id).first()
+def db_get_user(user_id: int, db: Session):
+    return db.query(DbUser).filter(DbUser.id == user_id).first()
 
 
-def db_update_user(id: int, db: Session, request: UserBase):
-    user = db.query(DbUser).filter(DbUser.id == id)
+def db_update_user(user_id: int, db: Session, request: UserBase):
+    user = db.query(DbUser).filter(DbUser.id == user_id)
     user.update(
         {
             DbUser.username: request.username,
@@ -38,8 +38,8 @@ def db_update_user(id: int, db: Session, request: UserBase):
     return "accepted."
 
 
-def db_delete_user(id: int, db: Session):
-    user = db.query(DbUser).filter(DbUser.id == id).first()
+def db_delete_user(user_id: int, db: Session):
+    user = db.query(DbUser).filter(DbUser.id == user_id).first()
     db.delete(user)
     db.commit()
     return "deleted."
