@@ -1,7 +1,10 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, HTTPException
+from fastapi.responses import JSONResponse, PlainTextResponse
 
+from src.user.routers import article_router, user_router
 from src.database.db_config import engine
-from src.user import models, user_router, article_router
+from src.exeptions import StoryException
+from src.user import models
 from src.blog import blog_router
 
 
@@ -18,3 +21,13 @@ models.Base.metadata.create_all(engine)
 @app.get("/")
 def read_root():
     return "hi \(*^^*)/"
+
+
+@app.exception_handler(StoryException)
+def story_exception_header(request: Request, exc: StoryException):
+    return JSONResponse(status_code=418, content={"detail": exc.name})
+
+
+# @app.exception_handler(HTTPException)
+# def custom_handler(request: Request, exc: StoryException):
+#     return PlainTextResponse(str(exc), status_code=400)

@@ -5,8 +5,8 @@ from sqlalchemy.orm import Session
 
 import src.user.db_user as db_req
 
-from .schemas import UserBase, UserDisplay
-from ..database.db_config import get_db
+from src.user.schemas import UserBase, UserDisplay
+from src.database.db_config import get_db
 
 
 router = APIRouter(prefix="/user", tags=["user"])

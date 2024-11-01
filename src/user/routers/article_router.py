@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 import src.user.db_article as db_req
 
 from src.user.schemas import ArticleDisplay, ArticleBase
-from ..database.db_config import get_db
+from src.database.db_config import get_db
 
 router = APIRouter(prefix="/article", tags=["article"])
 
