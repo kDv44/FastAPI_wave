@@ -2,6 +2,8 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse, PlainTextResponse
 
 from src.user.routers import article_router, user_router
+from src.product.routers import product_routers
+
 from src.database.db_config import engine
 from src.exeptions import StoryException
 from src.user import models
@@ -13,6 +15,7 @@ app = FastAPI()
 app.include_router(blog_router.router)
 app.include_router(user_router.router)
 app.include_router(article_router.router)
+app.include_router(product_routers.router)
 
 
 models.Base.metadata.create_all(engine)
